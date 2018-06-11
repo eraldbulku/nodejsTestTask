@@ -3,11 +3,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var app = express();
-var config = require('./config');
+var DBconfig = require('./db');
 
 // use ssesions for tracking logins
 app.use(session({
-	secret: 'treehouse',
+	secret: 'test_task_node',
 	resave: true,
 	saveUninitialized: false
 }));

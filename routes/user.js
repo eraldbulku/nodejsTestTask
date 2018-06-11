@@ -9,8 +9,8 @@ function login(req, res, next) {
           return next(err);
         } else {
           req.session.userId = user._id;
-          req.session.isAdmin = user.isAdmin;
-          return res.redirect('/profile');
+          req.session.isAdmin = user.is_admin;
+          return res.redirect('/chat-profile');
         }
       });
   } else {
@@ -44,8 +44,8 @@ function register(req, res, next) {
   			return next(error);
   		} else {
         req.session.userId = user._id;
-        req.session.isAdmin = user.isAdmin;
-  			return res.redirect('/profile');
+        req.session.isAdmin = user.is_admin;
+  			return res.redirect('/chat-profile');
   		}
   	});
   } else {
@@ -55,13 +55,13 @@ function register(req, res, next) {
   }
 }
 
-function getProfile (req, res, next) {
+function getChatProfile (req, res, next) {
   User.findById(req.session.userId)
       .exec(function(error, user) {
         if(error) {
           return next(error);
         } else {
-          return res.render('profile', {title: 'Profile', name: user.name})
+          return res.render('chatProfile', {title: 'Chat', name: user.name})
         }
       });
 }
@@ -69,4 +69,4 @@ function getProfile (req, res, next) {
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.register = register;
-module.exports.getProfile = getProfile;
+module.exports.getChatProfile = getChatProfile;

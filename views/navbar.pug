@@ -4,7 +4,13 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
     .container
       a.navbar-brand(href='/')
         | Node Task
-      
+      .nav-items.clearfix
+        if currentUser
+          a.nav-item.nav-link(href='chat-profile') Chat
+          a.nav-item.nav-link(href='statistics') Statistics & History
+        if isAdmin
+          a.nav-item.nav-link(href='users') Users
+
       if currentUser
         div
           img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='avatar')

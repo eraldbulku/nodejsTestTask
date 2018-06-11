@@ -5,7 +5,7 @@ var User = require('../models/user');
 var adminCreds = {
   email: "admin@admin.com",
   name: "admin",
-  isAdmin: true
+  is_admin: true
 };
 
 mongoose.connect("mongodb://localhost:27017/node_test_task");

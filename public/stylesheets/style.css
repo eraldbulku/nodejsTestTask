@@ -136,3 +136,14 @@ a:hover {
 .loggedName {
 	margin-right: 20px;
 }
+
+.card-body {
+	margin: 10px 10px 10px 10px;
+	color: #000;
+}
+
+#chat {
+	min-height: 300px;
+	max-height: 300px;
+	overflow-y: auto;
+}

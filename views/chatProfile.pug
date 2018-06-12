@@ -5,3 +5,15 @@ block content
     .row
       .col-md-8.col-md-offset-2
         h1.display-4.m-b-2 !{title}
+        input#userId(type='hidden' value=currentUser)
+
+        .card
+          .card-header.card-info Messages
+          .card-body
+            #chat
+            br
+            form#send-message
+              .input-group
+                input#message.form-control.input-lg(type='text', placeholder='Message' name='message' aria-describedby="basic-addon2")
+                span.input-group-btn
+                  button.btn.btn-primary.sendBtn(type='submit') Send

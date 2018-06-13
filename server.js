@@ -7,7 +7,7 @@ var chatComponent = require('./components/chat');
 /* Socket */
 io.sockets.on('connection', function(socket) {
   
-  chatComponent.chatConnection(socket);
+  chatComponent.chatConnection(io, socket);
   socket.on('disconnect', function() {
     console.log('client disconnect...', socket.id);
   });

@@ -6,9 +6,15 @@ block content
       .col-md-8.col-md-offset-2
         h1.display-4.m-b-2 !{title}
         input#userId(type='hidden' value=currentUser)
+        input#isAdmin(type='hidden' value=isAdmin)
 
         .card
           .card-header.card-info Messages
+            if users
+              select.pull-right.userList
+                option(value="0" disabled selected) Please select user
+                each user in users
+                  option(id=user.id)=user.name
           .card-body
             #chat
             br

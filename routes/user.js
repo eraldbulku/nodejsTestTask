@@ -61,12 +61,25 @@ function getChatProfile (req, res, next) {
         if(error) {
           return next(error);
         } else {
-          return res.render('chatProfile', {title: 'Chat', name: user.name})
+          if(user.is_admin) {
+            getUsers().exec(function(error, data) {
+              return res.render('chatProfile', {title: 'Chat', name: user.name, users: data});
+            });
+          } else {
+            return res.render('chatProfile', {title: 'Chat', name: user.name});
+          }
         }
       });
+}
+
+
+function getUsers() {
+  var users = User.find({'is_admin': false});
+  return users;              
 }
 
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.register = register;
 module.exports.getChatProfile = getChatProfile;
+module.exports.getUsers = getUsers;

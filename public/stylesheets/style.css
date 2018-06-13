@@ -2,7 +2,7 @@
 /* Base Styles */
 
 body {
-	background: #1d2a33 url('../images/bg.jpg') no-repeat;
+	background: #1d2a33;
 	background-size: cover; 
 }
 
@@ -146,4 +146,16 @@ a:hover {
 	min-height: 300px;
 	max-height: 300px;
 	overflow-y: auto;
+}
+
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+
+.userList {
+	color: #000;
 }

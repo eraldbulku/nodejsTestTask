@@ -50,6 +50,7 @@ function sendMessage(io, socket) {
     var selectedUserId = params.selectedUserId;
 
     User.findOne({'_id': userId}).then((sender) => User.findOne({'is_admin': true}).then((receiver) => {
+      User.lastAction(userId);
       Message.create({
         _id: new mongoose.Types.ObjectId(),
         sender: userId,

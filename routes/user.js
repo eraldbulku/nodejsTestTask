@@ -10,6 +10,7 @@ function login(req, res, next) {
         } else {
           req.session.userId = user._id;
           req.session.isAdmin = user.is_admin;
+          User.lastLogin(user._id);
           return res.redirect('/chat-profile');
         }
       });
@@ -62,7 +63,7 @@ function getChatProfile (req, res, next) {
           return next(error);
         } else {
           if(user.is_admin) {
-            getUsers().exec(function(error, data) {
+            User.getUsers().exec(function(error, data) {
               return res.render('chatProfile', {title: 'Chat', name: user.name, users: data});
             });
           } else {
@@ -72,14 +73,20 @@ function getChatProfile (req, res, next) {
       });
 }
 
-
-function getUsers() {
-  var users = User.find({'is_admin': false});
-  return users;              
+function getAllUsers(req, res, next) {
+  if(req.session.isAdmin) {
+    User.find().then(function (users) {
+      return res.render('users', { title: 'Users', users: users});
+    });
+  } else {
+    var err = new Error('You must be admin in to view this page');
+    err.status = 401;
+    return next(err);
+  }
 }
 
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.register = register;
 module.exports.getChatProfile = getChatProfile;
-module.exports.getUsers = getUsers;
+module.exports.getAllUsers = getAllUsers;

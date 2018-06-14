@@ -5,6 +5,8 @@ var session = require('express-session');
 var app = express();
 var DBconfig = require('./db');
 
+app.locals.moment = require('moment');
+
 // use ssesions for tracking logins
 app.use(session({
 	secret: 'test_task_node',

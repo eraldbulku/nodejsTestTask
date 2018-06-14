@@ -7,6 +7,8 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
       .nav-items.clearfix
         if currentUser
           a.nav-item.nav-link(href='chat-profile') Chat
+          if !isAdmin
+            a.nav-item.nav-link(href='actions') Actions
           a.nav-item.nav-link(href='statistics') Statistics & History
         if isAdmin
           a.nav-item.nav-link(href='users') Users

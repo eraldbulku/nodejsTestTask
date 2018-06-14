@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-12
+        h1.display-4.m-b-2 !{title}
+
+        table.table.table-bordered.table-dark.users-table
+          thead
+            tr
+              th User
+              th Created date
+              th Last visit
+              th Last action
+          tbody
+            each user in users
+              tr
+                th=user.name
+                th=moment(user.register_date).format('dddd Do of MMMM YYYY h:mm:ss a')
+                th=moment(user.last_visit_date).format('dddd Do of MMMM YYYY h:mm:ss a')
+                th=moment(user.last_action_date).format('dddd Do of MMMM YYYY h:mm:ss a')

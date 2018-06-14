@@ -46,5 +46,44 @@ UserSchema.statics.authenticate = function(email, name, callback) {
       });
 }
 
+function getUsers() {
+  var users = User.find({'is_admin': false});
+  return users;              
+}
+
+function lastLogin(userId) {
+  User.findOne({_id: userId}, function(err, user) {
+    if(user) {
+      user.last_visit_date = Date.now();
+      user.save(function(err) {
+        if(err) {
+          console.log('Something went wrong');
+        }
+      });
+    } else {
+      console.log('User not found');
+    }
+  });
+}
+
+function lastAction(userId) {
+  User.findOne({_id: userId}, function(err, user) {
+    if(user) {
+      user.last_action_date = Date.now();
+      user.save(function(err) {
+        if(err) {
+          console.log('Something went wrong');
+        }
+      });
+    } else {
+      console.log('User not found');
+    }
+  });
+}
+
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
+module.exports.getUsers = getUsers;
+module.exports.lastLogin = lastLogin;
+module.exports.lastAction = lastAction;
+

@@ -5,3 +5,45 @@ block content
     .row
       .col-md-8.col-md-offset-2
         h1.display-4.m-b-2 !{title}
+
+        select.pull-left.optionsLit
+          option(id='option1') Option 1
+          option(id='option2') Option 2
+          option(id='option2') Option 3
+
+        br
+        br
+
+        label.radio-inline
+          input.radioElement(type='radio', name='hidden', id='radiobutton1')
+          | Radiobutton 1
+        br
+        label.radio-inline
+          input.radioElement(type='radio', name='hidden', id='radiobutton2')
+          | Radiobutton 2
+        br
+        br
+
+        input.checkboxElement(id='checkbox1', type='checkbox', value='checkbox1')
+        | Checkbox 1
+        br
+        input.checkboxElement(id='checkbox2', type='checkbox', value='checkbox2')
+        | Checkbox 2
+        br
+        input.checkboxElement(id='checkbox3', type='checkbox', value='checkbox3')
+        | Checkbox 3
+
+        br
+        br
+
+        button.btn.btn-primary.btnElement(type='button', id='btn1') Button
+
+        br
+        br
+
+        input.numberElement(id='number', type='number')
+
+        br
+        br
+
+        input.colorElement(id='colorpicker', type='color')

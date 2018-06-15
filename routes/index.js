@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mid = require('../middleware');
 var userRoutes = require('./user');
+var actionRoutes = require('./action');
 
 // GET /chat profile
 router.get('/chat-profile', mid.requiresLogin, userRoutes.getChatProfile);
@@ -26,15 +27,7 @@ router.get('/register', mid.loggedOut, function(req, res, next) {
 router.post('/register', userRoutes.register);
 
 // GET /actions
-router.get('/actions', mid.requiresLogin, function(req, res, next) {
-	if(!req.session.isAdmin) {
-  	return res.render('actions', { title: 'Actions' });
-  } else {
-  	var err = new Error('You must be admin in to view this page');
-    err.status = 401;
-    return next(err);
-  }
-});
+router.get('/actions', mid.requiresLogin, actionRoutes.getActionPage);
 
 // GET /statistics
 router.get('/statistics', mid.requiresLogin, function(req, res, next) {
@@ -43,5 +36,8 @@ router.get('/statistics', mid.requiresLogin, function(req, res, next) {
 
 // GET /users
 router.get('/users', mid.requiresLogin, userRoutes.getAllUsers);
+
+// POST /user action
+router.post('/user-action', mid.requiresLogin, actionRoutes.saveAction);
 
 module.exports = router;

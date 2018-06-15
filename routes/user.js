@@ -35,24 +35,24 @@ function logout(req, res, next) {
 
 function register(req, res, next) {
   if(req.body.email && req.body.name) {
-  	var userData = {
-  		email: req.body.email,
-  		name: req.body.name,
-  	};
+    var userData = {
+      email: req.body.email,
+      name: req.body.name,
+    };
 
-  	User.create(userData, function(error, user) {
-  		if(error) {
-  			return next(error);
-  		} else {
+    User.create(userData, function(error, user) {
+      if(error) {
+        return next(error);
+      } else {
         req.session.userId = user._id;
         req.session.isAdmin = user.is_admin;
-  			return res.redirect('/chat-profile');
-  		}
-  	});
+        return res.redirect('/chat-profile');
+      }
+    });
   } else {
-  	var err = new Error('All fields required');
-  	err.status= 400;
-  	return next(err);
+    var err = new Error('All fields required');
+    err.status= 400;
+    return next(err);
   }
 }
 

@@ -3,6 +3,7 @@ var router = express.Router();
 var mid = require('../middleware');
 var userRoutes = require('./user');
 var actionRoutes = require('./action');
+var statisticsRoutes = require('./statistics');
 
 // GET /chat profile
 router.get('/chat-profile', mid.requiresLogin, userRoutes.getChatProfile);
@@ -30,9 +31,7 @@ router.post('/register', userRoutes.register);
 router.get('/actions', mid.requiresLogin, actionRoutes.getActionPage);
 
 // GET /statistics
-router.get('/statistics', mid.requiresLogin, function(req, res, next) {
-  return res.render('statistics', { title: 'Statistics & History' });
-});
+router.get('/statistics', mid.requiresLogin, statisticsRoutes.getStatistics);
 
 // GET /users
 router.get('/users', mid.requiresLogin, userRoutes.getAllUsers);

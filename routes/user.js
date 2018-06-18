@@ -4,9 +4,8 @@ function login(req, res, next) {
   if(req.body.email && req.body.name) {
       User.authenticate(req.body.email, req.body.name, function(error, user) {
         if(error || !user) {
-          var err = new Error('Wrond email or name');
-          err.status = 401;
-          return next(err);
+          var error = 'Wrond email or name';
+          return res.render('index', {title: 'Log In', error: error});
         } else {
           req.session.userId = user._id;
           req.session.isAdmin = user.is_admin;
@@ -15,9 +14,8 @@ function login(req, res, next) {
         }
       });
   } else {
-    var err = new Error('Email and name are required');
-    err.status= 401;
-    return next(err);
+    var error = 'Email and name are required';
+    return res.render('index', {title: 'Log In', error: error});
   }
 }
 
@@ -42,7 +40,7 @@ function register(req, res, next) {
 
     User.create(userData, function(error, user) {
       if(error) {
-        return next(error);
+        return res.render('register', {title: 'Sign Up', error: error});
       } else {
         req.session.userId = user._id;
         req.session.isAdmin = user.is_admin;
@@ -50,9 +48,8 @@ function register(req, res, next) {
       }
     });
   } else {
-    var err = new Error('All fields required');
-    err.status= 400;
-    return next(err);
+    var error = 'Email and name are required';
+    return res.render('register', {title: 'Sign Up', error: error});
   }
 }
 

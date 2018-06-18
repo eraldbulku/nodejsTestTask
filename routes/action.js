@@ -5,7 +5,7 @@ function getActionPage(req, res, next) {
   if(!req.session.isAdmin) {
     return res.render('actions', { title: 'Actions' });
   } else {
-    var err = new Error('You must be admin in to view this page');
+    var err = new Error('You must be normal user to view this page');
     err.status = 401;
     return next(err);
   }

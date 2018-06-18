@@ -5,7 +5,8 @@ block content
     .row
       .col-md-6.col-md-offset-3
         h1.display-4.m-b-2 Sign Up
-        
+        if error
+          .alert.alert-danger.error-msg(role="alert")=error
         // register form
         form(method='POST' action='/register')
           div.form-group

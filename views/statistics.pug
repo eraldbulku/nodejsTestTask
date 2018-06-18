@@ -2,6 +2,20 @@ extends layout
 
 block content
   .main.container
-    .row
-      .col-md-8.col-md-offset-2
+    .col-md-12
         h1.display-4.m-b-2 !{title}
+
+        table.table.table-bordered.table-dark.statistics-table
+          thead
+            tr
+              th Date
+              th Type
+              th Message
+              th Author
+          tbody
+            each record in statistics
+              tr
+                th=moment(record.date).format('dddd Do of MMMM YYYY h:mm:ss a')
+                th=record.type
+                th=record.message
+                th=record.name

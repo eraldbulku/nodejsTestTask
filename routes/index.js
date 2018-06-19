@@ -4,6 +4,7 @@ var mid = require('../middleware');
 var userRoutes = require('./user');
 var actionRoutes = require('./action');
 var statisticsRoutes = require('./statistics');
+var commandsRoutes = require('./commands');
 
 // GET /chat profile
 router.get('/chat-profile', mid.requiresLogin, userRoutes.getChatProfile);
@@ -38,5 +39,14 @@ router.get('/users', mid.requiresLogin, userRoutes.getAllUsers);
 
 // POST /user action
 router.post('/user-action', mid.requiresLogin, actionRoutes.saveAction);
+
+// GET /admin commands page
+router.get('/admin-commands', mid.requiresLogin, commandsRoutes.getAdminCommands);
+
+// POST /admin command
+router.post('/send-command', mid.requiresLogin, commandsRoutes.sendCommand);
+
+// GET /user commands
+router.get('/user-commands', mid.requiresLogin, commandsRoutes.getUserCommands);
 
 module.exports = router;

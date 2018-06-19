@@ -9,6 +9,9 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
           a.nav-item.nav-link(href='chat-profile') Chat
           if !isAdmin
             a.nav-item.nav-link(href='actions') Actions
+            a.nav-item.nav-link(href='commands') Commands
+          else
+            a.nav-item.nav-link(href='admin-commands') Commands
           a.nav-item.nav-link(href='statistics') Statistics & History
         if isAdmin
           a.nav-item.nav-link(href='users') Users

@@ -131,7 +131,7 @@ a:hover {
 	color: #000;
 }
 
-#chat {
+#chat, #chat-command {
 	min-height: 300px;
 	max-height: 300px;
 	overflow-y: auto;

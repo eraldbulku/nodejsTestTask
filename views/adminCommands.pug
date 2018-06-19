@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .main.container.clearfix
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 !{title}
+        input#userId(type='hidden' value=currentUser)
+        .card
+          .card-header.card-info !{title}
+            if users
+              select.pull-right.userList
+                option(value="0" disabled selected) Please select user
+                each user in users
+                  option(id=user.id)=user.name
+          .card-body
+            #chat-command
+            br
+            form#send-command
+              .input-group
+                input#command.form-control.input-lg(type='text', placeholder='Command' name='command' aria-describedby="basic-addon2")
+                span.input-group-btn
+                  button.btn.btn-primary.sendBtn(type='submit') Send
+block append scripts
+  script(src='js/commands.js')

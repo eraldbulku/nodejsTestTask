@@ -1,7 +1,9 @@
 var Message = require('../models/message');
 var Action = require('../models/Action');
+var Command = require('../models/command');
 const ACTION_TYPE = 'Statistics';
 const MESSAGE_TYPE = 'Message';
+const COMMAND_TYPE = 'Command';
 
 function getActionsByUser(userId) {
   return Action.find({author: userId})
@@ -13,6 +15,16 @@ function getActionsByUser(userId) {
 
 function getMessagesByUser(userId) {
   return Message.find()
+                .or({ sender: userId })
+                .or({ receiver: userId })
+                .populate({
+                  path: 'sender',
+                  model: 'User'
+                });
+}
+
+function getCommandsByUser(userId) {
+  return Command.find()
                 .or({ sender: userId })
                 .or({ receiver: userId })
                 .populate({
@@ -49,7 +61,23 @@ function parseMessages(messagesData) {
   return messagesStats;
 }
 
+function parseCommands(commandsData) {
+  var commandsStats = [];
+  for(var i = 0; i < commandsData.length; i++) {
+    var command = {
+      date: commandsData[i].created_date,
+      type: COMMAND_TYPE,
+      message: commandsData[i].command,
+      name: typeof commandsData[i].sender !== 'undefined' ? commandsData[i].sender.name : null
+    };
+    commandsStats.push(command);
+  }
+  return commandsStats;
+}
+
 module.exports.getActionsByUser = getActionsByUser;
 module.exports.getMessagesByUser = getMessagesByUser;
+module.exports.getCommandsByUser = getCommandsByUser;
 module.exports.parseActions = parseActions;
 module.exports.parseMessages = parseMessages;
+module.exports.parseCommands = parseCommands;

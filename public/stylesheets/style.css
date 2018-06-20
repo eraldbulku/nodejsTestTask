@@ -149,7 +149,7 @@ select, input {
 	color: #000;
 }
 
-.users-table, .statistics-table {
+.users-table, .statistics-table, .commands-table {
 	color: #fff;
 	font-size: 12px;
 }

@@ -2,11 +2,13 @@ var Message = require('../models/message');
 var User = require('../models/user');
 var mongoose = require('mongoose');
 
+// chat socket connection
 function chatConnection(io, socket) {
   sendMessage(io, socket);
   emitChat(socket);
 }
 
+// emit chat
 function emitChat(socket) {
   socket.on('render_chat', function(userId, selectedUserId) {
     if(userId) {
@@ -15,6 +17,7 @@ function emitChat(socket) {
   });
 }
 
+// render chat
 function renderChat(socket, userId, selectedUserId) {
   var receiverId = selectedUserId;
   if(!receiverId) {
@@ -27,6 +30,7 @@ function renderChat(socket, userId, selectedUserId) {
   }
 }
 
+// get chat for specific users (sender/receiver)
 function getChat(socket, userId, receiverId) {
   var query = Message.find()
                      .or({ sender: userId, receiver: receiverId })
@@ -43,6 +47,7 @@ function getChat(socket, userId, receiverId) {
   });
 }
 
+// send message
 function sendMessage(io, socket) {
   socket.on('send_message', function(params, callback){
     var message = params.message.trim();

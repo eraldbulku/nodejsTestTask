@@ -5,6 +5,9 @@ block content
     .row
       .col-md-6.col-md-offset-3
         h1.display-4.m-b-2 Log In
+        span (Admin creds: admin / admin@admin.com)
+        br
+        br
         if error
           .alert.alert-danger.error-msg(role="alert")=error
         form(method='POST' action='/login')

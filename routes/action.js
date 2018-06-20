@@ -1,9 +1,10 @@
 var Action = require('../models/Action');
 var User = require('../models/user');
 
+// access actions page
 function getActionPage(req, res, next) {
   if(!req.session.isAdmin) {
-    return res.render('actions', { title: 'Actions' });
+    return res.render('actions', { title: 'Actions', name: req.session.name });
   } else {
     var err = new Error('You must be normal user to view this page');
     err.status = 401;
@@ -11,6 +12,7 @@ function getActionPage(req, res, next) {
   }
 }
 
+// save action(post)
 function saveAction(req, res) {
   var userId = req.session.userId;
 

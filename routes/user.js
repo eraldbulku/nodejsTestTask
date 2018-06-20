@@ -1,5 +1,6 @@
 var User = require('../models/user');
 
+// login function
 function login(req, res, next) {
   if(req.body.email && req.body.name) {
       User.authenticate(req.body.email, req.body.name, function(error, user) {
@@ -8,6 +9,7 @@ function login(req, res, next) {
           return res.render('index', {title: 'Log In', error: error});
         } else {
           req.session.userId = user._id;
+          req.session.name = user.name;
           req.session.isAdmin = user.is_admin;
           User.lastLogin(user._id);
           return res.redirect('/chat-profile');
@@ -19,6 +21,7 @@ function login(req, res, next) {
   }
 }
 
+// logout function
 function logout(req, res, next) {
   if(req.session) {
     req.session.destroy(function(err) {
@@ -31,6 +34,7 @@ function logout(req, res, next) {
   }
 }
 
+// register(sign up) function
 function register(req, res, next) {
   if(req.body.email && req.body.name) {
     var userData = {
@@ -53,6 +57,7 @@ function register(req, res, next) {
   }
 }
 
+// open chat page and load data
 function getChatProfile (req, res, next) {
   User.findById(req.session.userId)
       .exec(function(error, user) {
@@ -70,10 +75,11 @@ function getChatProfile (req, res, next) {
       });
 }
 
+// open users page load list the users
 function getAllUsers(req, res, next) {
   if(req.session.isAdmin) {
     User.find().then(function (users) {
-      return res.render('users', { title: 'Users', users: users});
+      return res.render('users', { title: 'Users', name: req.session.name, users: users});
     });
   } else {
     var err = new Error('You must be admin in to view this page');

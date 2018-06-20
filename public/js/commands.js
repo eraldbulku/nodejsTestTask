@@ -4,8 +4,8 @@ $( document ).ready(function() {
         var $commandBox = $('#command');
         var $chatCommand = $('#chat-command');
         var $sendBtn = $('.sendBtn');
-        var $userList = $(".userList");
-        var userLoggedId = $("#userId").val();
+        var $userList = $('.userList');
+        var $runCommandBtn = $('.run-command-btn');
 
         $commandForm.submit(function(e) {
             e.preventDefault();
@@ -21,6 +21,15 @@ $( document ).ready(function() {
             var selectedUserId = $userList.children(":selected").attr("id");
             getCommandsCall({receiver: selectedUserId});
         }
+
+        $runCommandBtn.on('click', function() {
+            var command = $(this).attr('command-text');
+            try {
+                eval(JSON.parse(command)); 
+            } catch (e) {
+                alert(e.message);
+            }
+        });
 
         function saveRenderCommand() {
             var warnings = checkWarnings();
@@ -92,6 +101,5 @@ $( document ).ready(function() {
             }
             return null;
         }
-
     });
 });

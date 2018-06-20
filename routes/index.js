@@ -49,4 +49,7 @@ router.post('/send-command', mid.requiresLogin, commandsRoutes.sendCommand);
 // GET /user commands
 router.get('/user-commands', mid.requiresLogin, commandsRoutes.getUserCommands);
 
+// GET /user commands page
+router.get('/commands', mid.requiresLogin, commandsRoutes.checkUserCommands);
+
 module.exports = router;

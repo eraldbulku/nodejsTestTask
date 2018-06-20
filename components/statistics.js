@@ -5,6 +5,7 @@ const ACTION_TYPE = 'Statistics';
 const MESSAGE_TYPE = 'Message';
 const COMMAND_TYPE = 'Command';
 
+// get actions of specific user
 function getActionsByUser(userId) {
   return Action.find({author: userId})
                .populate({
@@ -13,6 +14,7 @@ function getActionsByUser(userId) {
                });
 }
 
+// get messages of specific user
 function getMessagesByUser(userId) {
   return Message.find()
                 .or({ sender: userId })
@@ -23,6 +25,7 @@ function getMessagesByUser(userId) {
                 });
 }
 
+// get commands of specific user
 function getCommandsByUser(userId) {
   return Command.find()
                 .or({ sender: userId })
@@ -33,6 +36,7 @@ function getCommandsByUser(userId) {
                 });
 }
 
+// parse actions data
 function parseActions(actionData) {
   var actionStats = [];
   for(var i = 0; i < actionData.length; i++) {
@@ -47,6 +51,7 @@ function parseActions(actionData) {
   return actionStats;
 }
 
+// parse messages data
 function parseMessages(messagesData) {
   var messagesStats = [];
   for(var i = 0; i < messagesData.length; i++) {
@@ -61,6 +66,7 @@ function parseMessages(messagesData) {
   return messagesStats;
 }
 
+// parse commands data
 function parseCommands(commandsData) {
   var commandsStats = [];
   for(var i = 0; i < commandsData.length; i++) {

@@ -1,11 +1,14 @@
+require('dotenv').config()
+
 module.exports = {
   db: {
-    host: 'mongodb://localhost:27017/',
-    database: 'node_test_task',
-    userTable: 'users',
-    actionTable: 'actions',
-    commandTable: 'commands',
-    messageTable: 'messages',
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    userTable: process.env.DB_USER_TABLE,
+    actionTable: process.env.DB_ACTION_TABLE,
+    commandTable: process.env.DB_COMMANDS_TABLE,
+    messageTable: process.env.DB_MESSAGE_TABLE,
   },
-  clientURL: 'http://localhost:3000/',
+  clientURL: process.env.CLIENT_URL,
+  serverPort: process.env.SERVER_PORT
 };

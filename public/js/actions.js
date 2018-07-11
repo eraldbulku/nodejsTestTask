@@ -75,7 +75,7 @@ $( document ).ready(function() {
         function actionCall(params) {
             $.ajax({
                 type: "POST",
-                url: '/user-action',
+                url: '/action/user-action',
                 data: params,
                 dataType: 'json',
                 success: function(data) {

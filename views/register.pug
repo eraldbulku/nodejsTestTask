@@ -8,7 +8,7 @@ block content
         if error
           .alert.alert-danger.error-msg(role="alert")=error
         // register form
-        form(method='POST' action='/register')
+        form(method='POST' action='/user/register')
           div.form-group
             label(for='name') Name:
             input#name.form-control(type='text', placeholder='name' name='name')

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var config = require('../config');
+var config = require('../../../config');
 
 var CommandSchema = new mongoose.Schema({
   sender: {

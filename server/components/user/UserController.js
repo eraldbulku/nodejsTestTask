@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require('./user');
 
 // login function
 function login(req, res, next) {
@@ -12,7 +12,7 @@ function login(req, res, next) {
           req.session.name = user.name;
           req.session.isAdmin = user.is_admin;
           User.lastLogin(user._id);
-          return res.redirect('/chat-profile');
+          return res.redirect('/user/chat-profile');
         }
       });
   } else {
@@ -48,7 +48,7 @@ function register(req, res, next) {
       } else {
         req.session.userId = user._id;
         req.session.isAdmin = user.is_admin;
-        return res.redirect('/chat-profile');
+        return res.redirect('/user/chat-profile');
       }
     });
   } else {

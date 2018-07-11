@@ -48,7 +48,7 @@ $( document ).ready(function() {
         function sendCommandCall(params) {
             $.ajax({
                 type: "POST",
-                url: '/send-command',
+                url: '/commands/send-command',
                 data: params,
                 dataType: 'json',
                 success: function(data) {
@@ -64,7 +64,7 @@ $( document ).ready(function() {
         function getCommandsCall(params) {
             $.ajax({
                 type: "GET",
-                url: '/user-commands',
+                url: '/commands/user-commands',
                 data: params,
                 dataType: 'json',
                 success: function(data) {

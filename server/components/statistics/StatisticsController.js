@@ -1,6 +1,6 @@
-var Message = require('../models/message');
-var Action = require('../models/Action');
-var statsComponent = require('../components/statistics');
+var Message = require('../chat/message');
+var Action = require('../action/action');
+var statsComponent = require('./statistics');
 
 // get statistics and history for logged in user
 function getStatistics(req, res, next) {

@@ -5,11 +5,13 @@
   "author": "Erald B",
   "private": true,
   "scripts": {
-    "start": "node ./server"
+    "start": "node ./server/server",
+    "seed-data": "node ./server/db/seeder/seed.js"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.13.3",
+    "dotenv": "^6.0.0",
     "express": "^4.13.4",
     "express-session": "^1.15.6",
     "moment": "^2.22.2",

@@ -1,5 +1,5 @@
-var Action = require('../models/Action');
-var User = require('../models/user');
+var Action = require('./action');
+var User = require('../user/user');
 
 // access actions page
 function getActionPage(req, res, next) {

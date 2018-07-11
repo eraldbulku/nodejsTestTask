@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var User = require('../models/user');
-var Message = require('../models/message');
-var config = require('../config');
+var User = require('../../components//user/UserController');
 
 // admin user
 var adminCreds = {
@@ -10,7 +8,6 @@ var adminCreds = {
   is_admin: true
 };
 
-mongoose.connect(`${config.db.host}${config.db.database}`);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

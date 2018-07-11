@@ -6,15 +6,15 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
         | Node Task
       .nav-items.clearfix
         if currentUser
-          a.nav-item.nav-link(href='chat-profile') Chat
+          a.nav-item.nav-link(href='/user/chat-profile') Chat
           if !isAdmin
-            a.nav-item.nav-link(href='actions') Actions
-            a.nav-item.nav-link(href='commands') Commands
+            a.nav-item.nav-link(href='/action/list') Actions
+            a.nav-item.nav-link(href='/commands/list') Commands
           else
-            a.nav-item.nav-link(href='admin-commands') Commands
-          a.nav-item.nav-link(href='statistics') Statistics & History
+            a.nav-item.nav-link(href='/commands/admin-commands') Commands
+          a.nav-item.nav-link(href='/statistics/list') Statistics & History
         if isAdmin
-          a.nav-item.nav-link(href='users') Users
+          a.nav-item.nav-link(href='/user/list') Users
 
       if currentUser
         div
@@ -22,5 +22,5 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
           span.loggedName #{name}
           a.btn.btn-light.pull-md-right(href='/logout') Log out
       else
-        a.btn.btn-info.pull-md-right.register-btn(href='/register') Sign Up
+        a.btn.btn-info.pull-md-right.register-btn(href='/user/register') Sign Up
         a.btn.btn-info.pull-md-right(href='/') Login

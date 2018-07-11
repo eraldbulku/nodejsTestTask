@@ -1,5 +1,5 @@
-var Message = require('../models/message');
-var User = require('../models/user');
+var Message = require('./message');
+var User = require('../user/user');
 var mongoose = require('mongoose');
 
 // chat socket connection

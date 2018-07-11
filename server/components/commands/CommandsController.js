@@ -1,5 +1,5 @@
-var User = require('../models/user');
-var Command = require('../models/command');
+var User = require('../user/user');
+var Command = require('./command');
 
 // open administartor command page
 function getAdminCommands(req, res, next) {

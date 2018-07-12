@@ -21,7 +21,7 @@ function emitChat(socket) {
 function renderChat(socket, userId, selectedUserId) {
   var receiverId = selectedUserId;
   if(!receiverId) {
-    User.findOne({'is_admin': true}, function(err, user) {
+    User.findOne({'is_admin': true}).then(function(user) {
       receiverId = user._id;
       getChat(socket, userId, receiverId)
     });
@@ -40,10 +40,11 @@ function getChat(socket, userId, receiverId) {
                         model: 'User'
                       });
 
-  query.sort('-created_date').exec(function(err, data){
+  query.sort('-created_date').then(function(data){
+    socket.emit('load_old_msgs', data);
+  }).catch(function(err){
     if(err) throw err;
     console.log('Sending old msgs!');
-    socket.emit('load_old_msgs', data);
   });
 }
 

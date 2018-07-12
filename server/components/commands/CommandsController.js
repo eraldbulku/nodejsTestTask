@@ -4,7 +4,7 @@ var Command = require('./command');
 // open administartor command page
 function getAdminCommands(req, res, next) {
   if(req.session.isAdmin) {
-    User.getUsers().exec(function(error, users) {
+    User.getUsers().then(function(users) {
       return res.render('adminCommands', {title: 'Commands', name: req.session.name, users: users});
     });
   } else {
@@ -39,12 +39,10 @@ function sendCommand(req, res) {
 function getUserCommands(req, res) {
   var query = Command.find({receiver: req.query.receiver});    
 
-  query.sort('-created_date').exec(function(error, data){
-    if (error) {
-      console.error(error);
-    } else {
-      res.status(200).json(data);
-    }
+  query.sort('-created_date').then(function(data){ 
+    res.status(200).json(data);
+  }).catch(function(error){
+    console.error(error);
   });
 }
 
@@ -57,7 +55,7 @@ function checkUserCommands(req, res) {
               model: 'User'
             })
            .sort('-created_date')
-           .exec(function(error, data) {
+           .then(function(data) {
               return res.render('userCommands', {title: 'Commands', name: req.session.name, commands: data});
            });
   } else {

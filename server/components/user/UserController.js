@@ -42,14 +42,12 @@ function register(req, res, next) {
       name: req.body.name,
     };
 
-    User.create(userData, function(error, user) {
-      if(error) {
-        return res.render('register', {title: 'Sign Up', error: error});
-      } else {
-        req.session.userId = user._id;
-        req.session.isAdmin = user.is_admin;
-        return res.redirect('/user/chat-profile');
-      }
+    User.create(userData).then(function(user) {
+      req.session.userId = user._id;
+      req.session.isAdmin = user.is_admin;
+      return res.redirect('/user/chat-profile');
+    }).catch(function(error){
+      return res.render('register', {title: 'Sign Up', error: error});
     });
   } else {
     var error = 'Email and name are required';
@@ -60,18 +58,16 @@ function register(req, res, next) {
 // open chat page and load data
 function getChatProfile (req, res, next) {
   User.findById(req.session.userId)
-      .exec(function(error, user) {
-        if(error) {
-          return next(error);
+      .then(function(user) {
+        if(user.is_admin) {
+          User.getUsers().then(function(data) {
+            return res.render('chatProfile', {title: 'Chat', name: user.name, users: data});
+          });
         } else {
-          if(user.is_admin) {
-            User.getUsers().exec(function(error, data) {
-              return res.render('chatProfile', {title: 'Chat', name: user.name, users: data});
-            });
-          } else {
-            return res.render('chatProfile', {title: 'Chat', name: user.name});
-          }
+          return res.render('chatProfile', {title: 'Chat', name: user.name});
         }
+      }).catch(function(error){
+        return next(error);
       });
 }
 

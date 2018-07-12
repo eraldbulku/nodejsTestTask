@@ -33,17 +33,16 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.statics.authenticate = function(email, name, callback) {
   User.findOne({ email: email, name: name })
-      .exec(function (error, user) {
-        if (error) {
-          return callback(error);
-        } else if ( !user ) {
+      .then(function (user) {
+        if ( !user ) {
           var err = new Error('User not found.');
           err.status = 401;
           return callback(err);
         }
-
         return callback(null, user);
-      });
+      }).catch(function(err){
+        return callback(err);
+      });;
 }
 
 function getUsers() {
@@ -52,7 +51,7 @@ function getUsers() {
 }
 
 function lastLogin(userId) {
-  User.findOne({_id: userId}, function(err, user) {
+  User.findOne({_id: userId}).then(function(user) {
     if(user) {
       user.last_visit_date = Date.now();
       user.save(function(err) {
@@ -67,7 +66,7 @@ function lastLogin(userId) {
 }
 
 function lastAction(userId) {
-  User.findOne({_id: userId}, function(err, user) {
+  User.findOne({_id: userId}).then(function(user) {
     if(user) {
       user.last_action_date = Date.now();
       user.save(function(err) {
